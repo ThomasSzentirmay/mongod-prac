@@ -22,19 +22,28 @@ client.connect().then(async () => {
     // });
 
     // Find all from collection (students)
-    const allStudents = await studentsCollection.find().toArray();
+    const allStudents = await studentsCollection
+        .find()
+        .limit(3) // how many objects from the collection you want to print out
+        .sort({name: 1}) // sort objects in ascending order, and -1 for descending
+        .toArray();
 
     // Find student by projects
     const oneStudent = await studentsCollection.findOne({projects: [{name: 'Cool app', type: 'database-tester'}]});
 
     // Find student by ID
     const studentId = await studentsCollection.findOne({
-        _id: new ObjectId("64bfecdc1a98bf99857d89f0")
+        _id: new ObjectId("64c003a004d9de826622d2a9")
     });
+
+    // Remove/Delete a student
+    // const deleteStudent = await studentsCollection.deleteMany({
+    //     _id: new ObjectId("<object_id>")
+    // })
 
     // Here, we can log the newly inserted object
     // console.log(insert);
 
     // Now we console log all students
-    console.log(studentId);
+    console.log(allStudents);
 })
