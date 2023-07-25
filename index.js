@@ -1,5 +1,5 @@
 // Pull in mongod package
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 
 // Connection URL
 const url = 'mongodb://localhost:27017';
@@ -14,9 +14,27 @@ client.connect().then(async () => {
 
     const studentsCollection = db.collection('students');
 
-    const students = await studentsCollection
-        .find()
-        .toArray();
+    // Insert into collection(new student)
+    // await studentsCollection.insertOne({
+    //     name: 'JD', 
+    //     course_type: 'FSF-full-time', 
+    //     projects: [{name: 'Cool app', type: 'database-tester'}]
+    // });
 
-    console.log(students);
+    // Find all from collection (students)
+    const allStudents = await studentsCollection.find().toArray();
+
+    // Find student by projects
+    const oneStudent = await studentsCollection.findOne({projects: [{name: 'Cool app', type: 'database-tester'}]});
+
+    // Find student by ID
+    const studentId = await studentsCollection.findOne({
+        _id: new ObjectId("64bfecdc1a98bf99857d89f0")
+    });
+
+    // Here, we can log the newly inserted object
+    // console.log(insert);
+
+    // Now we console log all students
+    console.log(studentId);
 })
