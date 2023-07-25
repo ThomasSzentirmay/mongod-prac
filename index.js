@@ -41,9 +41,6 @@ client.connect().then(async () => {
     //     _id: new ObjectId("<object_id>")
     // })
 
-    // Here, we can log the newly inserted object
-    // console.log(insert);
-
     // Now we console log all students
     console.log(allStudents);
 })
