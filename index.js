@@ -6,7 +6,7 @@ const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url);
 
 // Check connection
-client.connect().then(() => {
+client.connect().then(async () => {
     console.log('Client connected');
 
     // Reference the DB and Collection you want to interact with
@@ -14,10 +14,9 @@ client.connect().then(() => {
 
     const studentsCollection = db.collection('students');
 
-    studentsCollection
-    .find()
-    .toArray()
-    .then(students => {
-        console.log(students);
-    })
+    const students = await studentsCollection
+        .find()
+        .toArray();
+
+    console.log(students);
 })
