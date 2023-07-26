@@ -18,4 +18,14 @@ router.put('/like/:planet_id', async (req, res) => {
     res.json(planet);
 });
 
+// Get likes for a planet
+router.get('/likes/:planet_id', async (req, res) => {
+    const planet = await Planet.findById(req.params.planet_id).populate('likes');
+
+    res.json({
+        planet,
+        likes: planet.likes.length
+    })
+});
+
 module.exports = router;
