@@ -20,7 +20,11 @@ db.once('open', () => {
         });
 
         if(index === planets.length - 1) {
-            console.log(planetData);
+            await Planet.insertMany(planetData);
+
+            console.log('Planets seeded successfully');
+
+            process.exit();
         }
     });
 });
