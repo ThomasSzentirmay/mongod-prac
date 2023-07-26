@@ -9,6 +9,8 @@ const planetData = [];
 db.once('open', async () => {
   console.log('db connected!');
 
+  await Planet.delteteMany({});
+
   for (let planet in planets) {
     const data = planets[planet];
 
