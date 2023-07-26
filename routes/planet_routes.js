@@ -22,6 +22,23 @@ res.json(planet);
 });
 
 
+// Get single planet
+router.get('/planet/:name', async (req,res) => {
+    const planet = await Planet.findOne({
+        name: {
+            $regex: req.params.name,
+            $options: 'i'
+        }
+    });
+
+    if (planet) return res.json(planet);
+
+    res.json({
+        message: 'Planet not found'
+    });
+});
+
+
 
 // export our router object
 module.exports = router;
