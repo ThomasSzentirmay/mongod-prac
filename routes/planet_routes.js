@@ -12,6 +12,16 @@ router.get('/planets', async (req,res) => {
     }
 });
 
-// export our router object
+// Create a planet
+router.post('/planet', async (req, res) => {
 
+const planet = await Planet.create(req.body);
+
+res.json(planet);
+
+});
+
+
+
+// export our router object
 module.exports = router;
