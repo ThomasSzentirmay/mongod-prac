@@ -36,4 +36,17 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Favorite a planet
+router.put('/user/favorite', async (req, res) => {
+    const {user_id, planet_id} = req.body;
+
+    const user = await User.findByIdAndUpdate(user_id, {
+        $push: {
+            favorites: planet_id
+        }
+    }, { new: true });
+
+    res.json(user);
+});
+
 module.exports = router;
