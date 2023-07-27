@@ -20,7 +20,7 @@ router.post('/login', async (req, res) => {
     try{
         const user = await User.findOne({
             username: req.body.username
-        });
+        }).populate('favorites');
 
         if (!user) throw new Error('No user found with that username');
 

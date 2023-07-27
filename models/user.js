@@ -27,8 +27,16 @@ const userSchema = new Schema({
         }
     },
     toJSON: {
+        virtuals: true,
         transform: function (_, user) {
             delete user.password;
+        }
+    },
+    virtuals: {
+        favAmount: {
+            get() {
+                return this.favorites.length;
+            }
         }
     }
 });
