@@ -10,7 +10,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        minLength: 6
+        minLength: [6, 'Password must be at least 6 chars in length']
     },
     favorites: [
         {
