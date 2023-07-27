@@ -28,4 +28,17 @@ router.get('/likes/:planet_id', async (req, res) => {
     })
 });
 
+// Remove like from a planet
+router.put('/likes/remove/:planet_id', async (req, res) => {
+    const like_id = req.body.like_id;
+
+    const planet = await Planet.findByIdAndUpdate(req.params.planet_id, {
+        $pull: {
+            likes: like_id
+        }
+    }, { new: true });
+
+    res.json(planet);
+});
+
 module.exports = router;
