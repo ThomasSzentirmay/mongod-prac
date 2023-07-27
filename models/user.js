@@ -22,6 +22,8 @@ const userSchema = new Schema({
     methods: {
         validatePass: async function(formPassword) {
             const is_valid = await compare(formPassword, this.password);
+
+            return is_valid;
         }
     }
 });
