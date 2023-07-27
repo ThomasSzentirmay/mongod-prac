@@ -25,6 +25,11 @@ const userSchema = new Schema({
 
             return is_valid;
         }
+    },
+    toJSON: {
+        transform: function (_, user) {
+            delete user.password;
+        }
     }
 });
 
